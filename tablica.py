@@ -1,4 +1,3 @@
-from jedzenie import Jedzenie
 from turtle import Turtle
 
 
@@ -15,12 +14,12 @@ class Wynik(Turtle):
         self.goto(0, 200)
         self.update_tablicy()
 
-
     def game_over(self):
         self.goto(0, 0)
         self.write("Game Over", align="center", font=("Arial", 24, "normal"))
 
     def update_tablicy(self):
+        self.clear()
         self.goto(0, 200)
         self.write(f"Wynik: {self.wynik}  Highscore: {self.hscore}", align="center", font=("Arial", 24, "normal"))
 
@@ -32,7 +31,7 @@ class Wynik(Turtle):
         self.update_tablicy()
         self.wynik = 0
 
-    def zwiększanie_wyniku(self):
+    def wynik_up(self):
         self.wynik += 1
         self.clear()
         self.update_tablicy()

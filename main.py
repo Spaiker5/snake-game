@@ -1,8 +1,9 @@
 import time
-from turtle import Screen, Turtle
-from snake import Snake
+from turtle import Screen
+
 from jedzenie import Jedzenie
-from tablica_wyników import Wynik
+from snake import Snake
+from tablica import Wynik
 
 screen = Screen()
 screen.setup(500, 500)
@@ -12,14 +13,14 @@ screen.tracer(0)
 
 snake = Snake()
 jedzenie = Jedzenie()
-tablica_wyników = Wynik()
+tablica = Wynik()
 
 screen.listen()
 
-screen.onkey(snake.góra, "w")
-screen.onkey(snake.dół, "s")
-screen.onkey(snake.lewo, "a")
-screen.onkey(snake.prawo, "d")
+screen.onkey(snake.up, "w")
+screen.onkey(snake.down, "s")
+screen.onkey(snake.left, "a")
+screen.onkey(snake.right, "d")
 
 gramy = True
 
@@ -28,21 +29,20 @@ while gramy:
     time.sleep(0.1)
     snake.ruch()
 
-    if snake.łeb.distance(jedzenie) < 15:
+    if snake.head.distance(jedzenie) < 15:
         jedzenie.reset()
-        tablica_wyników.zwiększanie_wyniku()
-        snake.wydłóż()
+        tablica.wynik_up()
+        snake.add_segment()
 
-    if snake.łeb.xcor() > 240 or snake.łeb.xcor() < -240 or snake.łeb.ycor() > 240 or snake.łeb.ycor() < -240:
+    if snake.head.xcor() > 240 or snake.head.xcor() < -240 or snake.head.ycor() > 240 or snake.head.ycor() < -240:
         gramy = False
-        tablica_wyników.game_over()
-        tablica_wyników.reset()
+        tablica.game_over()
+        tablica.reset()
 
     for segment in snake.segmenty[1:]:
-        if snake.łeb.distance(segment) < 10:
+        if snake.head.distance(segment) < 10:
             gramy = False
-            tablica_wyników.game_over()
-            tablica_wyników.reset()
-
+            tablica.game_over()
+            tablica.reset()
 
 screen.exitonclick()

@@ -2,10 +2,10 @@ from turtle import Turtle
 
 POZYCJE_STARTOWE = [(0, 0), (-20, 0), (-40, 0)]
 DYS_RUCHU = 20
-GÓRA = 90
-DÓŁ = 270
-LEWO = 180
-PRAWO = 0
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
 
 
 class Snake:
@@ -13,7 +13,7 @@ class Snake:
     def __init__(self):
         self.segmenty = []
         self.create_snake()
-        self.łeb = self.segmenty[0]
+        self.head = self.segmenty[0]
 
     def create_snake(self):
         for pozycja in POZYCJE_STARTOWE:
@@ -26,7 +26,7 @@ class Snake:
         nowy_segment.goto(pozycja)
         self.segmenty.append(nowy_segment)
 
-    def wydłóż(self):
+    def add_segment(self):
         self.dodaj_segment(self.segmenty[-1].position())
 
     def ruch(self):
@@ -34,20 +34,20 @@ class Snake:
             nowy_x = self.segmenty[seg_num - 1].xcor()
             nowy_y = self.segmenty[seg_num - 1].ycor()
             self.segmenty[seg_num].goto(nowy_x, nowy_y)
-        self.łeb.forward(DYS_RUCHU)
+        self.head.forward(DYS_RUCHU)
 
-    def góra(self):
-        if self.łeb.heading() != DÓŁ:
-            self.łeb.setheading(GÓRA)
+    def up(self):
+        if self.head.heading() != DOWN:
+            self.head.setheading(UP)
 
-    def dół(self):
-        if self.łeb.heading() != GÓRA:
-            self.łeb.setheading(DÓŁ)
+    def down(self):
+        if self.head.heading() != UP:
+            self.head.setheading(DOWN)
 
-    def lewo(self):
-        if self.łeb.heading() != PRAWO:
-            self.łeb.setheading(LEWO)
+    def left(self):
+        if self.head.heading() != RIGHT:
+            self.head.setheading(LEFT)
 
-    def prawo(self):
-        if self.łeb.heading() != LEWO:
-            self.łeb.setheading(PRAWO)
+    def right(self):
+        if self.head.heading() != LEFT:
+            self.head.setheading(RIGHT)
