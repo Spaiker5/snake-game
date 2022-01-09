@@ -36,11 +36,13 @@ while gramy:
     if snake.łeb.xcor() > 240 or snake.łeb.xcor() < -240 or snake.łeb.ycor() > 240 or snake.łeb.ycor() < -240:
         gramy = False
         tablica_wyników.game_over()
+        tablica_wyników.reset()
 
     for segment in snake.segmenty[1:]:
         if snake.łeb.distance(segment) < 10:
             gramy = False
             tablica_wyników.game_over()
+            tablica_wyników.reset()
 
 
 screen.exitonclick()
